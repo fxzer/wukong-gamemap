@@ -1,5 +1,5 @@
 <script setup>
-defineProps({
+const props = defineProps({
   marker: {
     type: Object,
     required: true,
@@ -9,11 +9,15 @@ defineProps({
     default: false,
   },
 })
+
+const iconUrl = computed(() => {
+  return `${import.meta.env.VITE_BASE_URL}${props.marker.iconUrl}`
+})
 </script>
 
 <template>
   <div flex cursor-pointer items-center :class="isActive ? 'text-primary' : 'text-#fff9'">
-    <img :src="marker.iconUrl" :alt="marker.name" inline-block wh-5>
+    <img :src="iconUrl" :alt="marker.name" inline-block wh-5>
     <span mx-1>{{ marker.name }}</span>
     <span>{{ marker.landmarksCount }}</span>
   </div>
