@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "packageManager": "pnpm@9.10.0",
-  "description": "黑神话:悟空地图仿写",
+  "description": "黑神话悟空·游戏地图（仿写游民星空）",
   "scripts": {
     "build": "vite build",
     "dev": "vite --port 3333 --open",
