@@ -9,7 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     MarkerGroup: typeof import('./../components/MarkerGroup.vue')['default']
     MarkerItem: typeof import('./../components/MarkerItem.vue')['default']
-    TheFooter: typeof import('./../components/TheFooter.vue')['default']
     TheMap: typeof import('./../components/TheMap.vue')['default']
     TheNav: typeof import('./../components/TheNav.vue')['default']
   }

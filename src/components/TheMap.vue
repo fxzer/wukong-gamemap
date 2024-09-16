@@ -69,12 +69,12 @@ onUnmounted(() => {
 
   .leaflet-control-zoom-in {
     margin-bottom: 20px;
-    background: url('public/control/zoom-in.png');
+    background: url('/wukong-gamemap/control/zoom-in.png');
     background-size: cover;
   }
 
   .leaflet-control-zoom-out {
-    background: url('public/control/zoom-out.png');
+    background: url('/wukong-gamemap/control/zoom-out.png');
     background-size: cover;
   }
 }
