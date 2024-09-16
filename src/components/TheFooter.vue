@@ -5,7 +5,7 @@
     </button>
 
     <a
-      i-carbon-logo-github icon-btn
+      icon-btn i-carbon-logo-github
       rel="noreferrer"
       href="https://github.com/fxzer/wukong-gamemap"
       target="_blank"
