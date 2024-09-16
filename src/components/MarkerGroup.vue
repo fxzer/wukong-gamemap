@@ -8,7 +8,7 @@ defineProps({
     type: Array,
     required: true,
   },
-  activeMarkers: {
+  activeMarkerIds: {
     type: Array,
     required: true,
     default: () => [],
@@ -27,13 +27,13 @@ defineEmits(['toggleActive'])
         v-for="marker in markers"
         :key="marker.id"
         :marker="marker"
-        :is-active="activeMarkers.includes(marker.id)"
+        :is-active="activeMarkerIds.includes(marker.id)"
         @click="$emit('toggleActive', marker.id)"
       />
     </div>
   </div>
 </template>
 
-<style scoped lang='scss'>
+<style scoped>
 
 </style>

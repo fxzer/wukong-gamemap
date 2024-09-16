@@ -20,15 +20,15 @@ const mapStore = useMapStore()
     <MarkerGroup
       v-for="item in mapStore.markerGoups"
       :key="item.groupName"
-      my5
+      mb5
       :title="item.groupName"
       :markers="item.landmarkCatalogs"
-      :active-markers="mapStore.activeMarkers"
+      :active-marker-ids="mapStore.activeMarkerIds"
       @toggle-active="mapStore.toggleMarkerActive"
     />
   </nav>
 </template>
 
-<style scoped lang='scss'>
+<style scoped>
 
 </style>

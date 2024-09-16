@@ -1,13 +1,14 @@
 import mockjs from 'mockjs'
-import { mapsMarker, ROUNDS } from './map-data'
-import markData from './mark-data'
+import rounds from './map-rounds'
+import mapsMarker from './maps-marker'
+import markerData from './marker-data'
 
-function mockGetRoundList() {
+function mocRoundList() {
   mockjs.mock(/\/api\/map\/getRoundList/, 'get', () => {
-    return ROUNDS
+    return rounds
   })
 }
-function getMarkerList() {
+function mockMarkerList() {
   mockjs.mock(/\/api\/map\/getMarkerList/, 'get', (opts) => {
     const urlParams = new URLSearchParams(opts.url.split('?')[1])
     const id = Number.parseInt(urlParams.get('id') ?? '48', 10)
@@ -16,12 +17,12 @@ function getMarkerList() {
   })
 }
 
-function mockGetMarkerList() {
-  mockjs.mock(/\/api\/mark\/getMarkList/, 'get', (opts) => {
+function mockMarkerData() {
+  mockjs.mock(/\/api\/mark\/getMarkerData/, 'get', (opts) => {
     const urlParams = new URLSearchParams(opts.url.split('?')[1])
     const ids = urlParams.get('ids')
 
-    return markData
+    return markerData
       .filter(item => ids?.split(',')?.includes(`${item.landmarkCatalogId}`))
       .map(item => ({ ...item, iconUrl: _getIcon(item.landmarkCatalogId) ?? '' }))
   })
@@ -45,7 +46,7 @@ function _getIcon(id: number): string | void {
 }
 
 export function setupMock() {
-  mockGetRoundList()
-  getMarkerList()
-  mockGetMarkerList()
+  mocRoundList()
+  mockMarkerList()
+  mockMarkerData()
 }

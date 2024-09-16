@@ -25,4 +25,8 @@ export default defineConfig({
       warn: true,
     }),
   ],
+  safelist: [
+    'wh-6',
+    'op-70',
+  ],
 })

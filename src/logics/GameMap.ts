@@ -1,6 +1,7 @@
-import { getMarkerTmpl, getPopupTmpl } from '@/api'
+import { BASE_URL, getMarkerTmpl, getPopupTmpl } from '@/api'
 import ejs from 'ejs'
 import L from 'leaflet'
+
 import 'leaflet/dist/leaflet.css'
 
 const ZOOM_LIMIT = { maxZoom: 12, minZoom: 9 } as const
@@ -13,8 +14,8 @@ const TileUrlTempMap = new Map([
   ['61', 'maps/{id}/{z}/{x}_{y}.webp'],
 ])
 
-export class GameMap {
-  private map: L.Map | void = void 0
+export default class GameMap {
+  public map: L.Map | void = void 0
   private tileLayer: L.TileLayer | void = void 0
   private zoomControl: L.Control.Zoom | void = void 0
   private layerGroup: L.LayerGroup | void = void 0
@@ -31,7 +32,10 @@ export class GameMap {
     this.markerTmpl = await getMarkerTmpl()
   }
 
-  init(el: HTMLElement) {
+  init(el: HTMLElement | null) {
+    if (!el)
+      return
+
     this.map = L.map(el, {
       crs: L.CRS.Simple,
       zoom: 10,
@@ -80,7 +84,7 @@ export class GameMap {
       const { x, y, name, description, iconUrl } = mark
       const contentHtml = ejs.render(this.markerTmpl ?? '', {
         name,
-        iconUrl,
+        iconUrl: `${BASE_URL}${iconUrl}`,
       })
 
       const marker = L.marker(L.latLng(x, y), {
@@ -94,7 +98,7 @@ export class GameMap {
         L.popup({
           content: ejs.render(this.popupTmpl ?? '', {
             name,
-            iconUrl,
+            iconUrl: `${BASE_URL}${iconUrl}`,
             description,
           }),
         }),

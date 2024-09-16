@@ -4,10 +4,12 @@
 <template>
   <div h-screen flex>
     <TheNav />
-    <main flex-1 bg-black />
+    <main relative flex-1 bg-black>
+      <TheMap />
+    </main>
   </div>
 </template>
 
-<style scoped lang='scss'>
+<style scoped>
 
 </style>

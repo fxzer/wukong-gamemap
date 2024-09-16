@@ -1,39 +1,50 @@
 import type { Round } from '@/types'
-import { getMarkerListById, getRoundList } from '@/api'
+import { getMarkerData, getMarkerListById, getRoundList } from '@/api'
 
 export const useMapStore = defineStore('map', () => {
   const markerGoups = ref<any>([])
   const roundId = ref(48)
 
   const roundList = ref<Round[]>([])
+  const markerData = ref<any>([])
+  const activeMarkerIds = ref<number[]>([])
+
   async function fetchRoundList() {
     roundList.value = await getRoundList()
   }
 
-  async function fetchMarkerData() {
+  async function fetchMarkerList() {
     const { landmarkCatalogGroups = [] } = await getMarkerListById(roundId.value) as any
     markerGoups.value = landmarkCatalogGroups
   }
-  const activeMarkers = ref<number[]>([])
+
+  async function fetchMarkerData(ids: number[]) {
+    markerData.value = await getMarkerData(ids)
+  }
 
   function toggleMarkerActive(id: number) {
-    if (activeMarkers.value.includes(id)) {
-      activeMarkers.value = activeMarkers.value.filter(item => item !== id)
+    if (activeMarkerIds.value.includes(id)) {
+      activeMarkerIds.value = activeMarkerIds.value.filter(item => item !== id)
     }
     else {
-      activeMarkers.value.push(id)
+      activeMarkerIds.value.push(id)
     }
   }
-  onMounted(() => {
-    fetchRoundList()
-    fetchMarkerData()
+  fetchRoundList()
+  fetchMarkerList()
+
+  watchEffect(() => {
+    fetchMarkerData(activeMarkerIds.value)
   })
   return {
     markerGoups,
     roundId,
     roundList,
-    activeMarkers,
+    markerData,
+    activeMarkerIds,
     fetchRoundList,
     toggleMarkerActive,
   }
+}, {
+  persist: true,
 })
