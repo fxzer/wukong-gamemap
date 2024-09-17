@@ -5,13 +5,13 @@ const mapStore = useMapStore()
 </script>
 
 <template>
-  <nav class="bg-#222" h-full w-90 p5 text-sm>
+  <nav class="bg-#222" h-full w-90 p5 text-sm text-white>
     <img src="/layout/nav-logo.png" alt="" inline-block h-25>
     <div grid grid-cols-3 gap-3 py-5>
       <div
         v-for="item in mapStore.roundList" :key="item.id"
         class="h-8 cursor-pointer rounded-md text-center leading-8"
-        :class="item.id === mapStore.roundId ? 'bg-#eac27e text-#222' : ' bg-#46464c text-white'"
+        :class="item.id === mapStore.roundId ? 'bg-#eac27e text-#222' : ' bg-#46464c '"
         @click="mapStore.roundId = item.id"
       >
         {{ item.regionName }}

@@ -22,7 +22,7 @@ onMounted(() => {
 
 watch(
   () => mapStore.roundId,
-  (id: string) => gameMap.renderTile(id),
+  (id: number) => gameMap.renderTile(id.toString()),
 )
 
 watch(() => mapStore.markerData, (val: any) => {
@@ -97,6 +97,11 @@ onUnmounted(() => {
       width: 30px;
       height: 30px;
     }
+  }
+}
+.marker-wrapper {
+  .marker-title {
+    color: #fff;
   }
 }
 </style>
